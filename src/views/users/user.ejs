@@ -1,5 +1,29 @@
-<%- include('partials/header.ejs', { title: 'Homepage', desc: 'Homepage', user }) %>
+<%- include('../partials/header.ejs', { title: pUser.username, desc: `${pUser.username}'s profile on SSMT Reloaded.`, user }) %>
 <div class="center-align">
     <h4><%= pUser.username %>'s profile</h4>
-</div> 
-<%- include('partials/footer.ejs') %>
+</div>
+<hr>
+<ul class="collection with-header">
+    <li class="collection-header">User's threads</li>
+    <% for(var i = 0; i < threads.length; i++) { %>
+        <li class="collection-item">
+            <a href="/threads/<%= threads[i]._id %>"><%= threads[i].title %></a>
+            <div class="secondary-content">
+                Posted <%= threads[i].createdAt %>
+            </div>
+        </li>
+    <% } %>
+</ul>
+<hr>
+<ul class="collection with-header">
+    <li class="collection-header">User's comments</li>
+    <% for(var i = 0; i < comments.length; i++) { %>
+        <li class="collection-item">
+            <%= comments[i].text %>
+            <div class="secondary-content">
+                <a href="/threads/<%= comments[i].to %>">Parent thread</a>
+            </div>
+        </li>
+    <% } %>
+</ul>
+<%- include('../partials/footer.ejs') %>

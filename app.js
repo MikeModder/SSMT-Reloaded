@@ -33,6 +33,7 @@ app.use(morgan('dev'));
 /* Insert routes here */
 app.use('/',        require('./src/routes/index'));
 app.use('/threads', require('./src/routes/threads'));
+app.use('/users',   require('./src/routes/users'));
 
 /* Error handler */
 app.use((err, req, res, next) => {
