@@ -1,0 +1,11 @@
+<%- include('partials/header.ejs', { title: 'Homepage', desc: 'Homepage', user }) %>
+    <% if(error){ %>
+        <p><%= error %></p>
+    <% } %>
+    <% if(user){ %>
+        <p>Hello, <%= user.username %>!</p>
+    <% } else { %>
+        <a href="/login">Login</a> or <a href="/signup">Sign up</a>
+    <% } %>
+    I am the homepage. 
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,8 @@
+<%- include('partials/header.ejs', { title: 'Signup', desc: 'Sign up for an account', user: null }) %>
+    <form action="/signup" method="post">
+        Username: <input type="text" name="username" id="username"><br>
+        Password: <input type="password" name="password" id="password"><br>
+        Confirm: <input type="password" name="password2" id="password2"><br>
+        <input type="submit" value="Signup">
+    </form>
+<%- include('partials/footer.ejs') %>

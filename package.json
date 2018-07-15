@@ -1,0 +1,29 @@
+{
+  "name": "authtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MikeModder <oddman56@protonmail.com> (http://github.com/MikeModder)",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "joi": "^13.4.0",
+    "mongoose": "^5.1.6",
+    "mongoose-unique-validator": "^2.0.1",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "validator": "^10.4.0"
+  }
+}

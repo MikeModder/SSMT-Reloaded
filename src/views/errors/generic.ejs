@@ -1,0 +1,14 @@
+<%- include('../partials/header.ejs', { title: 'Error', desc: 'Oh snap, generic error page!', user }) %>
+<h3 class="center-align">Aw snap</h3>
+<div class="center-align">
+    <p>
+        Oh no, something broke!
+
+        This is what we know:
+        <br>
+        <code>
+            <%= error %>
+        </code>
+    </p>
+</div>
+<%- include('../partials/footer.ejs') %>

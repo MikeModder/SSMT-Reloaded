@@ -1,0 +1,45 @@
+<%- include('../partials/header.ejs', { title: thread.title, desc: `Thread by ${thread.author.username} | x replies | x score`, user }) %>
+<% if(error != '') { %>
+    <div class="card-panel red lighten-4 red-text text-darken-3">
+        <%= error %>
+    </div>
+<% } %>
+<div class="center-align">
+    <h4 class="center-align">
+        <%= thread.title %>
+    </h4>
+    <div class="card-panel">
+        <%= thread.body %>
+    </div>
+    <p>Posted by <%= thread.author.username %> on <%= thread.createdAt %></p>
+    <br>
+</div>
+<ul class="collection with-header">
+    <li class="collection-header">Comments</li>
+    
+    <% for(var i = 0; i < comments.length; i++) { %>
+        <li class="collection-item">
+            <%= comments[i].text %>
+            <div class="secondary-content">
+                Created by <a href="/users/<%= comments[i].author._id %>"><%= comments[i].author.username %></a>
+            </div>
+        </li>
+    <% } %>
+</ul>
+<br>
+<% if(user) { %>
+    <h4>Add new comment</h4>
+    <form class="col s12" action="/threads/<%= thread._id %>/new" method="post">
+        <div class="row">
+            <div class="input-field col s6">
+                Body: <textarea name="text" id="text" cols="30" rows="10"></textarea><br>
+                <input type="submit" value="Create!">
+            </div>
+        </div>
+    </form>
+<% } else { %>
+    <div class="card-panel">
+        You must <a href="/login">log in</a> or <a href="/signup">sign up</a> to reply to this thread!
+    </div>
+<% } %>
+<%- include('../partials/footer.ejs') %>

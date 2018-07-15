@@ -1,0 +1,40 @@
+<%- include('../partials/header.ejs', { title: 'Threads', desc: 'View created threads.', user }) %>
+<% if(error != '') { %>
+    <div class="card-panel red lighten-4 red-text text-darken-3">
+        <%= error %>
+    </div>
+<% } %>
+<ul class="collection with-header">
+    <li class="collection-header">Threads</li>
+    
+    <% for(var i = 0; i < threads.length; i++) { %>
+        <li class="collection-item">
+            <a href="/threads/<%= threads[i]._id %>"><%= threads[i].title %></a>
+            <div class="secondary-content">
+                <%= threads[i].commentCount %> replies | created by <a href="/users/<%= threads[i].author._id %>"><%= threads[i].author.username %></a>
+            </div>
+        </li>
+    <% } %>
+</ul>
+<br>
+<hr>
+<br>
+<% if(user) { %>
+    <h3>Create new thread</h3>
+    <form class="col s12" action="/threads/new" method="post">
+        <div class="row">
+            <div class="input-field inline col s6">
+                Title: <input type="text" name="title" id="title"><br>
+            </div>
+            <div class="input-field col s6">
+                Body: <textarea name="text" id="text" cols="30" rows="10"></textarea><br>
+                <input type="submit" value="Create!">
+            </div>
+        </div>
+    </form>
+<% } else { %>
+    <div class="card-panel">
+        You must <a href="/login">log in</a> or <a href="/signup">sign up</a> to create a new thread!
+    </div>
+<% } %>
+<%- include('../partials/footer.ejs') %>
