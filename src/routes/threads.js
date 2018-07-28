@@ -44,8 +44,6 @@ router.post('/new', ensureLoggedIn, async (req, res) => {
         if(err) throw err;
         res.redirect(`/threads/${newDoc._id}`);
     });
-    
-    
 });
 
 router.get('/:tid', ensureThreadExists, async (req, res) => {
@@ -68,7 +66,7 @@ router.post('/:tid/new', ensureLoggedIn, ensureThreadExists, async (req, res) =>
         return res.redirect(`/threads/${tid}`);
     }
     const r = new Reply({ to: tid, author: req.user._id, text });
-    r.save((err, nr) => {
+    r.save((err) => {
         if(err) throw err;
         res.redirect(`/threads/${tid}`);
     });

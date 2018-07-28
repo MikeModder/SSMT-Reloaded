@@ -8,10 +8,7 @@ const schema = mongoose.Schema({
 });
 
 schema.methods.checkPass = function (pass) {
-    //const valid = await bcrypt.compare(pass, this.password);
-    console.log(this);
     bcrypt.compare(pass, this.password, (err, same) => {
-        console.log(`[DEBUG] Comparing pass ${pass} against hash ${this.password}: ${same}`);
         return same;
     });
 };

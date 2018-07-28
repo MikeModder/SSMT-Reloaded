@@ -15,18 +15,28 @@ router.get('/:uid', ensureUserExists, async (req, res) => {
 
 async function ensureUserExists(req, res, next) {
     const uid = req.params.uid;
-    if(!uid || !validator.isMongoId(uid)) {
+    let user;
+    if(!uid) {
         return res.redirect('/');
     }
-    const user = await User.findById(uid).select('-password').exec();
+    if(!validator.isMongoId(uid)){
+        // Maybe it's a username?
+        user = await User.findOne({ username: new RegExp(uid, 'i') }).select('-password').exec();
+        console.log(`[DEBUG] Trying ${uid} as username: ${user}`);
+    } else {
+        // It is a MongoId
+        user = await User.findById(uid).select('-password').exec();
+        console.log(`[DEBUG] Trying ${uid} as MongoId: ${user}`);
+    }
+
     if(!user) return res.status(404).render('errors/404', { user: req.user });
     res.locals.pUser = user;
     next();
 }
 
-function ensureLoggedIn(req, res, next) {
+/* function ensureLoggedIn(req, res, next) {
     if(req.isAuthenticated()) return next();
     return res.status(401).render('errors/401', { user: req.user });
-}
+} */
 
 module.exports = router;

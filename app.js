@@ -28,7 +28,7 @@ app.use('/assets', express.static(path.join(__dirname, 'src/static/')));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(morgan('dev'));
+if(process.env.ENVR === 'dev') app.use(morgan('dev'));
 
 /* Insert routes here */
 app.use('/',        require('./src/routes/index'));
@@ -38,7 +38,6 @@ app.use('/users',   require('./src/routes/users'));
 /* Error handler */
 app.use((err, req, res, next) => {
     if(err){
-        console.error(err)
         return res.status(500).render('errors/500', { user: req.user });
     }
     next();

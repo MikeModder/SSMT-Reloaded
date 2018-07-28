@@ -1,4 +1,9 @@
 <%- include('partials/header.ejs', { title: 'Signup', desc: 'Sign up for an account', user: null }) %>
+    <% if(error != '') { %>
+        <div class="card-panel red lighten-4 red-text text-darken-3">
+            <%= error %>
+        </div>
+    <% } %>
     <form action="/signup" method="post">
         Username: <input type="text" name="username" id="username"><br>
         Password: <input type="password" name="password" id="password"><br>

@@ -1,11 +1,13 @@
 <%- include('partials/header.ejs', { title: 'Homepage', desc: 'Homepage', user }) %>
-    <% if(error){ %>
-        <p><%= error %></p>
+    <% if(error != ''){ %>
+        <div class="card-panel red lighten-4 red-text text-darken-3">
+            <%= error %>
+        </div>
     <% } %>
-    <% if(user){ %>
-        <p>Hello, <%= user.username %>!</p>
-    <% } else { %>
-        <a href="/login">Login</a> or <a href="/signup">Sign up</a>
+    <% if(info != ''){ %>
+        <div class="card-panel blue lighten-3 blue-text text-darken-2">
+            <%= info %>
+        </div>
     <% } %>
     I am the homepage. 
 <%- include('partials/footer.ejs') %>

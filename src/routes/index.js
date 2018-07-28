@@ -5,12 +5,12 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 router.get('/', (req, res) => {
-    res.render('home', { user: req.user, error: req.flash('error') });
+    res.render('home', { user: req.user, error: req.flash('error'), info: req.flash('user') });
 });
 
-router.get('/error', (req, res) => {
+/* router.get('/error', (req, res) => {
     throw new Error('sample error');
-});
+}); */
 
 router.get('/login', (req, res) => {
     if(req.user) {
@@ -49,7 +49,10 @@ router.post('/signup', async (req, res) => {
         .then(() => {
             res.redirect('/');
         })
-        .catch(e => { throw e; });
+        .catch(() => {
+            req.flash('error', 'Error while signing up! Perhaps that username is taken?');
+            res.redirect('/signup');
+        });
 });
 
 router.get('/logout', (req, res) => {
