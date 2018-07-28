@@ -5,10 +5,9 @@ const Thread = require('../models/Thread');
 const Reply = require('../models/Reply');
 
 router.get('/:uid', ensureUserExists, async (req, res) => {
-    const uid = req.params.uid;
     const pUser = res.locals.pUser;
-    const threads = await Thread.find({ author: uid }).lean().exec();
-    const comments = await Reply.find({ author: uid }).lean().exec();
+    const threads = await Thread.find({ author: pUser._id }).lean().exec();
+    const comments = await Reply.find({ author: pUser._id }).lean().exec();
 
     res.render('users/user', { user: req.user, pUser, threads, comments });
 });
