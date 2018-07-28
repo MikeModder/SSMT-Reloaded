@@ -46,7 +46,7 @@ router.post('/signup', async (req, res) => {
     const u = new User({ username, password });
     u.save()
         .then(() => {
-            req.login(u, (e) => { req.flash('error', e) });
+            req.login(u, (e) => { req.flash('error', e); });
             res.redirect('/');
         })
         .catch(() => {

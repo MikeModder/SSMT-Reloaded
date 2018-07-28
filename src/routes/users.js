@@ -21,11 +21,9 @@ async function ensureUserExists(req, res, next) {
     if(!validator.isMongoId(uid)){
         // Maybe it's a username?
         user = await User.findOne({ username: new RegExp(uid, 'i') }).select('-password').exec();
-        console.log(`[DEBUG] Trying ${uid} as username: ${user}`);
     } else {
         // It is a MongoId
         user = await User.findById(uid).select('-password').exec();
-        console.log(`[DEBUG] Trying ${uid} as MongoId: ${user}`);
     }
 
     if(!user) return res.status(404).render('errors/404', { user: req.user });
