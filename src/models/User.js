@@ -15,13 +15,14 @@ schema.methods.checkPass = function (pass) {
 
 schema.plugin(uniquePlugin);
 
-/*schema.pre('save', (next) => {
-    bcrypt.genSalt(10)
-        .then(salt => {
-            bcrypt.hash(this.password, salt)
-                .then(hash => { this.password = hash; next(); });
-        })
-        .catch(e => { throw e; });
-});*/
+schema.pre('save', async function (next) {
+    try {
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (e) {
+        throw e;
+    }
+        
+});
 
 module.exports = mongoose.model('User', schema);

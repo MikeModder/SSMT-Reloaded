@@ -43,10 +43,10 @@ router.post('/signup', async (req, res) => {
     const password2 = req.body.password2;
     if(validator.isEmpty(username) || validator.isEmpty(password) || validator.isEmpty(password2)) return res.render('signup', { error: 'One or more fields is empty!' });
     if(password !== password2) { req.flash('error', 'Passwords do not match!'); return res.redirect('/signup'); }
-    const hashedPw = await bcrypt.hash(password, 10);
-    const u = new User({ username, password: hashedPw });
+    const u = new User({ username, password });
     u.save()
         .then(() => {
+            req.login(u, (e) => { req.flash('error', e) });
             res.redirect('/');
         })
         .catch(() => {
